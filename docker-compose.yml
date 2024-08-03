@@ -1,0 +1,9 @@
+services:
+  website:
+    build: ./website
+    container_name: website
+    ports:
+      - "80:80"
+  database:
+   build: ./database
+   container_name: database
