@@ -25,7 +25,7 @@ then go to
 
 ### Email system (PHPMailer)
 
-If you want to test the email system, just put an email account credentials in `.env` file. Keep in mind that some things may be missing (like the website logo) because this is not deployed in a real server.
+If you want to test the email system, just put an email account credentials in `website/.env` file. Keep in mind that some things may be missing (like the website logo) because this is not deployed in a real server.
 
 Email features:
 
