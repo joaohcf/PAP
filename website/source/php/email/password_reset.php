@@ -1,33 +1,42 @@
 <?php
+    require_once '../../../vendor/autoload.php';
+    require_once '../dbconnect.php';
+
+    use Dotenv\Dotenv;
+    use PHPMailer\PHPMailer\PHPMailer;
+
+    $dotenv = Dotenv::createImmutable('../../../');
+    $dotenv->load();
+
+    $mail_email = $_ENV['EMPRESA_EMAIL'];
+    $mail_pass = $_ENV['EMPRESA_PASSWORD'];
+
     $empresa = "SELECT * FROM Empresa";
     $doEmpresa = mysqli_query($dbConnect, $empresa);
     
     if(mysqli_num_rows($doEmpresa) == 1){
         $drEmpresa = mysqli_fetch_assoc($doEmpresa);
 
-        $empresa_email = getenv('EMPRESA_EMAIL');
-        $empresa_pass = getenv('EMPRESA_PASSWORD');
-
         $empresa_nome = $drEmpresa['Empresa'];
+        $empresa_email = $drEmpresa['Email'];
         $empresa_morada = $drEmpresa['Morada'];
         $empresa_localidade = $drEmpresa['Localidade'];
         $empresa_telemovel = $drEmpresa['Telemovel'];
     }
 
-    require '../../../vendor/phpmailer/phpmailer/PHPMailerAutoLoad.php';
     $mail = new PHPMailer;
 
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = $empresa_email;
-    $mail->Password = $empresa_pass;
+    $mail->Username = $env_email;
+    $mail->Password = $env_pass;
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
     $mail->isHTML(true);
 
-    $mail->setFrom($empresa_email);
+    $mail->setFrom($env_email);
     $mail->addAddress($request_email);
 
     $mail->Subject = 'Recuperação de palavra-passe';

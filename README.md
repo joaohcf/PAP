@@ -27,6 +27,8 @@ then go to
 
 If you want to test the email system, just put an email account credentials in `website/.env` file. Keep in mind that some things may be missing (like the website logo) because this is not deployed in a real server.
 
+I configured it to use `smtp.gmail.com` as SMTP server.
+
 Email features:
 
 - Forget password

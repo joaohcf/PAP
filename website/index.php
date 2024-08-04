@@ -14,6 +14,7 @@
 
     <!-- Body -->
     <body>
+
         <!-- Header -->
         <?php require("layouts/header.php") ?>
 

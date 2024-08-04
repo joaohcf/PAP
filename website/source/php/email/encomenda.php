@@ -1,12 +1,21 @@
 <?php
+    require_once '../../../vendor/autoload.php';
+    require_once '../dbconnect.php';
+
+    use Dotenv\Dotenv;
+    use PHPMailer\PHPMailer\PHPMailer;
+
+    $dotenv = Dotenv::createImmutable('../../../');
+    $dotenv->load();
+
+    $env_email = $_ENV['EMPRESA_EMAIL'];
+    $env_pass = $_ENV['EMPRESA_PASSWORD'];
+
     $empresa = "SELECT * FROM Empresa";
     $doEmpresa = mysqli_query($dbConnect, $empresa);
 
     if(mysqli_num_rows($doEmpresa) == 1){
         $drEmpresa = mysqli_fetch_assoc($doEmpresa);
-
-        $mail_email = getenv('EMPRESA_EMAIL');
-        $mail_pass = getenv('EMPRESA_PASSWORD');
 
         $empresa_nome = $drEmpresa['Empresa'];
         $empresa_email = $drEmpresa['Email'];
@@ -24,20 +33,19 @@
     $produtos = "SELECT Produtos.Produto, Produtos.Referencia, Factura_Produtos.Quantidade, Factura_Produtos.Price FROM Factura_Produtos INNER JOIN Produtos ON Factura_Produtos.IDProduto = Produtos.IDProduto WHERE Factura_Produtos.IDFactura = '$IDFactura'";
     $doProdutos = mysqli_query($dbConnect,$produtos);
 
-    require '../../../vendor/phpmailer/phpmailer/PHPMailerAutoLoad.php';
     $mail = new PHPMailer;
 
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = $mail_email;
-    $mail->Password = $mail_pass;
+    $mail->Username = $env_email;
+    $mail->Password = $env_pass;
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->CharSet = 'UTF-8';
     $mail->isHTML(true);
 
-    $mail->setFrom($mail_email);
+    $mail->setFrom($env_email);
     $mail->addAddress($cliente_email);
 
     $mail->Subject = 'Encomenda em processamento';
