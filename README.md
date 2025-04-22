@@ -49,7 +49,7 @@ Email features:
 - Most likely not.
 
 ### Is this website perfect?
-- No. I do think i could do a lot of things better but at that time i didnt have the knowledge that i have today (2024).
+- No. I do think I could do a lot of things better but at that time I didnt have the knowledge that I have today (2024).
 
-### Did i enjoy doing this?
+### Did I enjoy doing this?
 - ABSOLUTELY! 😊
